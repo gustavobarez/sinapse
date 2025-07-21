@@ -1,1 +1,1 @@
-# sinapse
+# <img src="./src/main/java/com/sinapse/sinapse/images/giant-sinapse-logo.png" width="30"> Sinapse
