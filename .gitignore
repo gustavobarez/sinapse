@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Arch Linux ###
+.tool-versions

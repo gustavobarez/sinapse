@@ -1,0 +1,15 @@
+meta {
+  name: Prompt API
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8080/ai/generate?message=Conte uma piada sobre Java
+  body: none
+  auth: inherit
+}
+
+params:query {
+  message: Conte uma piada sobre Java
+}
