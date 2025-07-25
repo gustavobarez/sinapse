@@ -35,12 +35,11 @@ export function Sidebar({ isPinnedOpen, onMenuClick }: SidebarProps) {
           )}
         >
           <img
-            src="images/sinapse-logo-bright.png"
+            src={theme === "dark" ? "images/sinapse-logo-better-quality.png" : "images/sinapse-logo-bright.png"}
             alt="logo"
             className="w-8 h-8"
           ></img>
           <div className="flex-1">
-            {/* 32 x 36 */}
 
             <Button
               className={cn(
