@@ -1,6 +1,69 @@
+textarea::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 999px;
+  background: transparent;
+}
+textarea::-webkit-scrollbar-thumb {
+  background: #a3a3a3;
+  border-radius: 999px;
+}
+textarea::-webkit-scrollbar-thumb:hover {
+  background: #6366f1;
+  border-radius: 999px;
+}
+textarea::-webkit-scrollbar-track {
+  background: transparent !important;
+  border-radius: 999px;
+}
+textarea::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 16px;
+  background: transparent;
+}
+textarea::-webkit-scrollbar-thumb {
+  background: #a3a3a3;
+  border-radius: 16px;
+}
+textarea::-webkit-scrollbar-thumb:hover {
+  background: #6366f1;
+  border-radius: 16px;
+}
+textarea::-webkit-scrollbar-track {
+  background: transparent !important;
+  border-radius: 16px;
+}
+textarea {
+  scrollbar-color: #a3a3a3 transparent !important;
+  scrollbar-width: thin;
+}
+textarea::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+textarea {
+  scrollbar-color: #a3a3a3 transparent !important;
+  scrollbar-width: thin;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+textarea::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 8px;
+  background: #f3f4f6;
+}
+textarea::-webkit-scrollbar-thumb {
+  background: #a3a3a3;
+  border-radius: 8px;
+}
+textarea::-webkit-scrollbar-thumb:hover {
+  background: #6366f1;
+}
+textarea::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 8px;
+}
 @layer base {
   :root {
     --background: hsl(0 0% 100%);
@@ -13,9 +76,9 @@
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-    --gradient-start: 271 76% 56%; /* #8A2BE2 */
-    --gradient-end: 322 81% 44%; /* #C71585 */
-    
+    --gradient-start: 271 76% 56%;
+    --gradient-end: 322 81% 44%;
+
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 210 40% 96.1%;
@@ -28,28 +91,28 @@
     --radius: 0.5rem;
   }
   .dark {
-    --background: 232 29% 12%; /* #1A1A2E */
-    --foreground: 0 0% 88%; /* #E0E0E0 */
-    --primary: 271 76% 56%; /* #8A2BE2 */
-    --primary-foreground: 0 0% 88%; /* #E0E0E0 */
-    --gradient-start: 271 76% 56%; /* #8A2BE2 */
-    --gradient-end: 322 81% 44%; /* #C71585 */
-    --support: 236 17% 36%; /* #4E4E6A */
-    --card: 236 17% 36%; /* #4E4E6A */
-    --card-foreground: 0 0% 88%; /* #E0E0E0 */
-    --popover: 236 17% 36%; /* #4E4E6A */
-    --popover-foreground: 0 0% 88%; /* #E0E0E0 */
-    --secondary: 236 17% 36%; /* #4E4E6A */
-    --secondary-foreground: 0 0% 88%; /* #E0E0E0 */
-    --muted: 236 17% 36%; /* #4E4E6A */
-    --muted-foreground: 0 0% 88%; /* #E0E0E0 */
-    --accent: 271 76% 56%; /* #8A2BE2 */
-    --accent-foreground: 0 0% 88%; /* #E0E0E0 */
-    --destructive: 322 81% 44%; /* #C71585 */
-    --destructive-foreground: 0 0% 88%; /* #E0E0E0 */
-    --border: 236 17% 36%; /* #4E4E6A */
-    --input: 236 17% 36%; /* #4E4E6A */
-    --ring: 271 76% 56%; /* #8A2BE2 */
+    --background: 232 29% 12%;
+    --foreground: 0 0% 88%;
+    --primary: 271 76% 56%;
+    --primary-foreground: 0 0% 88%;
+    --gradient-start: 271 76% 56%;
+    --gradient-end: 322 81% 44%;
+    --support: 236 17% 36%;
+    --card: 236 17% 36%;
+    --card-foreground: 0 0% 88%;
+    --popover: 236 17% 36%;
+    --popover-foreground: 0 0% 88%;
+    --secondary: 236 17% 36%;
+    --secondary-foreground: 0 0% 88%;
+    --muted: 236 17% 36%;
+    --muted-foreground: 0 0% 88%;
+    --accent: 271 76% 56%;
+    --accent-foreground: 0 0% 88%;
+    --destructive: 322 81% 44%;
+    --destructive-foreground: 0 0% 88%;
+    --border: 236 17% 36%;
+    --input: 236 17% 36%;
+    --ring: 271 76% 56%;
     --radius: 0.5rem;
   }
   * {

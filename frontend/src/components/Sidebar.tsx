@@ -1,4 +1,3 @@
-// src/components/Sidebar.tsx
 import { Button } from "@components/ui/button";
 import { Menu, MessageSquare, Moon, Settings, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -25,7 +24,6 @@ export function Sidebar({ isPinnedOpen, onMenuClick }: SidebarProps) {
     setIsHovering(false);
   };
 
-  // ...existing code...
   return (
     <div
       onMouseEnter={handleMouseEnter}
@@ -36,16 +34,9 @@ export function Sidebar({ isPinnedOpen, onMenuClick }: SidebarProps) {
       )}
     >
       <img
-        src={
-          theme === "dark"
-            ? "images/sinapse-logo-better-quality.png"
-            : "images/sinapse-logo-bright.png"
-        }
+        src={"images/sinapse-logo-better-quality-semfundo.png"}
         alt="logo"
         className="w-8 h-8 mb-4"
-        style={
-          theme === "dark" ? { filter: "drop-shadow(0 0 8px #8A2BE2)" } : {}
-        }
       />
       <div className="flex-1">
         <Button
