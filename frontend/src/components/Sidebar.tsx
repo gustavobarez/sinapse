@@ -29,45 +29,57 @@ export function Sidebar({ isPinnedOpen, onMenuClick }: SidebarProps) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "flex h-full flex-col border-r p-2 transition-all duration-300 bg-background text-foreground",
-        isExpanded ? "w-64" : "w-16 items-center"
+        "flex h-full flex-col border-r transition-all duration-300 bg-background text-foreground",
+        isExpanded ? "w-64" : "w-20"
       )}
     >
-      <img
-        src={"images/sinapse-logo-better-quality-semfundo.png"}
-        alt="logo"
-        className="w-8 h-8 mb-4"
-      />
-      <div className="flex-1">
-        <Button
-          className={cn(
-            "w-full justify-start gap-2 bg-gradient-to-r from-[hsl(var(--gradient-start))] to-[hsl(var(--gradient-end))] text-primary-foreground border-none shadow-md",
-            isExpanded ? "pl-2" : "justify-center"
-          )}
-          variant="ghost"
-          size="icon"
-          onClick={onMenuClick}
-        >
-          <Menu className="h-5 w-5" />
-        </Button>
-        <Button
-          variant="ghost"
-          className={cn(
-            "w-full justify-start gap-2 bg-support text-card-foreground border-none",
-            isExpanded ? "pl-2" : "justify-center"
-          )}
-        >
-          <MessageSquare className="h-5 w-5" />
-          {isExpanded && <span>Nova Conversa</span>}
-        </Button>
+      <div className="flex justify-center py-4 px-2">
+        <img
+          src={"images/sinapse-logo-better-quality-semfundo.png"}
+          className="w-[60px] h-[36px] object-contain"
+          alt="logo"
+        />
       </div>
-      <div className="mt-auto">
+
+      <div className="flex-1 flex flex-col gap-2">
+        <div className="px-2">
+          <Button
+            className="w-full h-12 rounded-full bg-gradient-to-r from-[hsl(var(--gradient-start))] to-[hsl(var(--gradient-end))] text-primary-foreground border-none shadow-md flex items-center relative"
+            variant="ghost"
+            onClick={onMenuClick}
+          >
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8">
+              <Menu className="h-5 w-5" />
+            </span>
+            {isExpanded && (
+              <div className="flex-1 text-left text-base whitespace-nowrap overflow-hidden pl-8">
+                Menu
+              </div>
+            )}
+          </Button>
+        </div>
+
+        <div className="px-2">
+          <Button
+            variant="ghost"
+            className="w-full h-12 bg-support text-card-foreground border-none flex items-center relative"
+          >
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8">
+              <MessageSquare className="h-5 w-5" />
+            </span>
+            {isExpanded && (
+              <div className="flex-1 text-left text-base whitespace-nowrap overflow-hidden pl-8">
+                Nova Conversa
+              </div>
+            )}
+          </Button>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2 p-2">
         <Button
           variant="ghost"
-          className={cn(
-            "w-full justify-start gap-2 border-none",
-            isExpanded ? "pl-2" : "justify-center"
-          )}
+          className="w-full h-12 border-none flex items-center relative"
           style={
             theme === "dark"
               ? {
@@ -79,24 +91,32 @@ export function Sidebar({ isPinnedOpen, onMenuClick }: SidebarProps) {
           }
           onClick={() => setTheme(theme == "dark" ? "light" : "dark")}
         >
-          {theme == "dark" ? (
-            <Sun className="h-5 w-5" />
-          ) : (
-            <Moon className="h-5 w-5" />
-          )}
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8">
+            {theme == "dark" ? (
+              <Sun className="h-5 w-5" />
+            ) : (
+              <Moon className="h-5 w-5" />
+            )}
+          </span>
           {isExpanded && (
-            <span>{theme == "dark" ? "Modo Claro" : "Modo Escuro"}</span>
+            <div className="flex-1 text-left whitespace-nowrap overflow-hidden pl-8">
+              {theme == "dark" ? "Modo Claro" : "Modo Escuro"}
+            </div>
           )}
         </Button>
+
         <Button
           variant="ghost"
-          className={cn(
-            "w-full justify-start gap-2 bg-support text-card-foreground border-none",
-            isExpanded ? "pl-2" : "justify-center"
-          )}
+          className="w-full h-12 bg-support text-card-foreground border-none flex items-center relative"
         >
-          <Settings className="h-5 w-5" />
-          {isExpanded && <span>Configurações</span>}
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8">
+            <Settings className="h-5 w-5" />
+          </span>
+          {isExpanded && (
+            <div className="flex-1 text-left whitespace-nowrap overflow-hidden pl-8">
+              Configurações
+            </div>
+          )}
         </Button>
       </div>
     </div>
