@@ -1,11 +1,9 @@
-/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: hsl(0 0% 100%);
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -15,6 +13,9 @@
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
+    --gradient-start: 271 76% 56%; /* #8A2BE2 */
+    --gradient-end: 322 81% 44%; /* #C71585 */
+    
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 210 40% 96.1%;
@@ -26,7 +27,6 @@
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
   }
-
   .dark {
     --background: 232 29% 12%; /* #1A1A2E */
     --foreground: 0 0% 88%; /* #E0E0E0 */
@@ -35,10 +35,23 @@
     --gradient-start: 271 76% 56%; /* #8A2BE2 */
     --gradient-end: 322 81% 44%; /* #C71585 */
     --support: 236 17% 36%; /* #4E4E6A */
+    --card: 236 17% 36%; /* #4E4E6A */
+    --card-foreground: 0 0% 88%; /* #E0E0E0 */
+    --popover: 236 17% 36%; /* #4E4E6A */
+    --popover-foreground: 0 0% 88%; /* #E0E0E0 */
+    --secondary: 236 17% 36%; /* #4E4E6A */
+    --secondary-foreground: 0 0% 88%; /* #E0E0E0 */
+    --muted: 236 17% 36%; /* #4E4E6A */
+    --muted-foreground: 0 0% 88%; /* #E0E0E0 */
+    --accent: 271 76% 56%; /* #8A2BE2 */
+    --accent-foreground: 0 0% 88%; /* #E0E0E0 */
+    --destructive: 322 81% 44%; /* #C71585 */
+    --destructive-foreground: 0 0% 88%; /* #E0E0E0 */
+    --border: 236 17% 36%; /* #4E4E6A */
+    --input: 236 17% 36%; /* #4E4E6A */
+    --ring: 271 76% 56%; /* #8A2BE2 */
+    --radius: 0.5rem;
   }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
