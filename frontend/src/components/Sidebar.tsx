@@ -1,5 +1,5 @@
 import { Button } from "@components/ui/button";
-import { Menu, MessageSquare, Moon, Settings, Sun } from "lucide-react";
+import { Clock, Menu, MessageSquare, Moon, Settings, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useState } from "react";
 import { cn } from "./lib/utils";
@@ -83,7 +83,7 @@ export function Sidebar({ isPinnedOpen, onMenuClick }: SidebarProps) {
         </div>
       </div>
       <div className="flex-1 flex flex-col gap-2">
-        <div className="px-2">
+        <div className="px-2 flex flex-col gap-2">
           <Button
             variant="ghost"
             className="w-full h-12 bg-support text-card-foreground border-none flex items-center relative"
@@ -97,6 +97,25 @@ export function Sidebar({ isPinnedOpen, onMenuClick }: SidebarProps) {
               </div>
             )}
           </Button>
+          {isExpanded && (
+            <div className="mt-2">
+              <div className="flex items-center gap-2 text-muted-foreground text-sm font-medium mb-2 px-1">
+                <Clock className="h-4 w-4" />
+                <span>Recentes</span>
+              </div>
+              <Button
+                variant="ghost"
+                className="w-full h-12 border-none flex items-center relative"
+              >
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8">
+                  <MessageSquare className="h-5 w-5" />
+                </span>
+                <div className="flex-1 text-left whitespace-nowrap overflow-hidden pl-8">
+                  Chat com suporte
+                </div>
+              </Button>
+            </div>
+          )}
         </div>
       </div>
       <div className="flex flex-col gap-2 p-2">
