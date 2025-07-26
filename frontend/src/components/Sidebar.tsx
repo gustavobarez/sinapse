@@ -10,6 +10,9 @@ interface SidebarProps {
 }
 
 export function Sidebar({ isPinnedOpen, onMenuClick }: SidebarProps) {
+  // fetch("http://localhost:8080/ai/generate?message=olá")
+  //   .then((res) => res.json())
+  //   .then((data) => console.log(data));
   const [isHovering, setIsHovering] = useState(false);
 
   const { theme, setTheme } = useTheme();
