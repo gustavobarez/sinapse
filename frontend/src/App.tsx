@@ -1,4 +1,5 @@
 import { ChatInput } from "@components/Chat";
+import { ChatBubble } from "@components/ChatBubble";
 import { Navbar } from "@components/Navbar";
 import { Sidebar } from "@components/Sidebar";
 import { ThemeProvider } from "@components/theme-provider";
@@ -8,6 +9,9 @@ import "./textarea-focus.css";
 function App() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
   const [text, setText] = useState("");
+  const [messages, setMessages] = useState<
+    { text: string; sender: "user" | "system" }[]
+  >([]);
 
   const toggleSidebar = () => {
     setIsSidebarExpanded(!isSidebarExpanded);
@@ -23,13 +27,32 @@ function App() {
         <Sidebar isPinnedOpen={isSidebarExpanded} onMenuClick={toggleSidebar} />
         <main className="flex-1 p-6 relative">
           <Navbar />
+          <div className="flex flex-col gap-2">
+            {messages.map((msg, idx) => (
+              <ChatBubble key={idx} message={msg.text} sender={msg.sender} />
+            ))}
+          </div>
           <div className="absolute bottom-10 left-0 w-full flex justify-center">
             <div className="w-full max-w-3xl pb-0">
               <ChatInput
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 onSend={() => {
-                  /*logica de envio */
+                  const cleanedText = text
+                    .split("\n")
+                    .filter((line) => line.trim() !== "")
+                    .join("\n");
+                  if (!cleanedText.trim()) return;
+                  setMessages((prev) => [...prev, { text, sender: "user" }]);
+                  fetch(`http://localhost:8080/ai/generate?message=${text}`)
+                    .then((res) => res.json())
+                    .then((data) => {
+                      setMessages((prev) => [
+                        ...prev,
+                        { text: data.result, sender: "system" },
+                      ]);
+                    });
+                  setText("");
                 }}
               />
             </div>

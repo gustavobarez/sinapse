@@ -14,6 +14,12 @@ export function ChatInput({ value, onChange, onSend }: ChatInputProps) {
       <TextArea
         value={value}
         onChange={onChange}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            onSend();
+          }
+        }}
         className="resize-none w-full border-none rounded-t-2xl p-3 text-base min-h-[10px] max-h-[152px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 bg-transparent outline-none textarea-focus-top"
         placeholder="Digite sua mensagem..."
       />
