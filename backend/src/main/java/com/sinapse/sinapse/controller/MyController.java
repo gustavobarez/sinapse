@@ -19,7 +19,16 @@ public class MyController {
 
     @GetMapping("/ai/generate")
     public Map<String, Object> generate(@RequestParam String message) throws JsonProcessingException {
-        String engineeredMessage = "Get a fresh perspective! Simply provide a message, and rephrase it into one big sentence for my ecommerce application. Only give me the result. I don't need extra details. Here's the input: "
+        String engineeredMessage = """
+                Você é um assistente educacional especializado em RAG (Retrieval Augmented Generation).
+                Seu objetivo é ajudar estudantes a entender conteúdos, responder dúvidas, resumir textos e gerar arquivos de resumo (ex: PDF).
+                Use apenas o contexto fornecido pelo usuário. Se não souber a resposta, diga 'Não sei'.
+                Responda de forma clara, objetiva e sem informações extras ou opiniões pessoais.
+                Se o usuário pedir um resumo, gere um texto conciso e fiel ao conteúdo.
+                Se o usuário pedir para gerar um arquivo, explique o conteúdo que será incluído.
+                Se o usuário fizer uma pergunta, responda diretamente com base no contexto.
+                Aqui está o input do usuário:
+                """
                 + message;
 
         String response = chatClient.prompt()
