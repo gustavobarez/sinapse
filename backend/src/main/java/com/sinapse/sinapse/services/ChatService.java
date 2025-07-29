@@ -1,24 +1,27 @@
-package com.sinapse.sinapse.controller;
-
-import java.util.Map;
+package com.sinapse.sinapse.services;
 
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.openai.OpenAiChatOptions;
+import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+@Service
+public class ChatService {
 
-@RestController
-public class MyController {
     private final ChatClient chatClient;
 
-    public MyController(ChatClient chatClient) {
-        this.chatClient = chatClient;
+    public ChatService(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory) {
+        OpenAiChatOptions options = new OpenAiChatOptions();
+        options.setModel("llama-3.3-70b-versatile");
+        this.chatClient = chatClientBuilder
+                .defaultOptions(options)
+                .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
+                .build();
+
     }
 
-    @GetMapping("/ai/generate")
-    public Map<String, Object> generate(@RequestParam String message) throws JsonProcessingException {
+    public String generate(String message) {
         String engineeredMessage = """
                 Você é um assistente educacional especializado em RAG (Retrieval Augmented Generation).
                 Seu objetivo é ajudar estudantes a entender conteúdos, responder dúvidas, resumir textos e gerar arquivos de resumo (ex: PDF).
@@ -31,11 +34,13 @@ public class MyController {
                 """
                 + message;
 
-        String response = chatClient.prompt()
+        String response = chatClient
+                .prompt()
                 .user(engineeredMessage)
                 .call()
                 .content();
 
-        return Map.of("result", response);
+        return response;
     }
+
 }
