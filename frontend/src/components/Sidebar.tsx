@@ -10,9 +10,6 @@ interface SidebarProps {
 }
 
 export function Sidebar({ isPinnedOpen, onMenuClick }: SidebarProps) {
-  // fetch("http://localhost:8080/ai/generate?message=olá")
-  //   .then((res) => res.json())
-  //   .then((data) => console.log(data));
   const [isHovering, setIsHovering] = useState(false);
 
   const { theme, setTheme } = useTheme();
@@ -49,8 +46,7 @@ export function Sidebar({ isPinnedOpen, onMenuClick }: SidebarProps) {
               variant="ghost"
               onClick={onMenuClick}
               className={cn(
-                "border-none shadow-md flex items-center justify-center w-12 h-12 rounded-full",
-                "bg-gradient-to-r from-[hsl(var(--gradient-start))] to-[hsl(var(--gradient-end))] text-primary-foreground"
+                "border-none flex items-center justify-center w-12 h-12 rounded-full",
               )}
             >
               <Menu className="h-5 w-5" />
@@ -59,8 +55,7 @@ export function Sidebar({ isPinnedOpen, onMenuClick }: SidebarProps) {
               <Button
                 variant="ghost"
                 className={cn(
-                  "border-none shadow-md flex items-center justify-center w-12 h-12 rounded-full",
-                  "bg-gradient-to-r from-[hsl(var(--gradient-start))] to-[hsl(var(--gradient-end))] text-primary-foreground"
+                  "border-none flex items-center justify-center w-12 h-12 rounded-full",
                 )}
               >
                 <svg
@@ -78,7 +73,7 @@ export function Sidebar({ isPinnedOpen, onMenuClick }: SidebarProps) {
           </div>
           {isExpanded && (
             <img
-              src={"images/sinapse-logo-better-quality-semfundo.png"}
+              src={"images/icon.png"}
               className="w-[60px] h-[36px] object-contain"
               alt="logo"
             />
@@ -102,7 +97,7 @@ export function Sidebar({ isPinnedOpen, onMenuClick }: SidebarProps) {
           </Button>
           {isExpanded && (
             <div className="mt-2">
-              <div className="flex items-center gap-2 text-muted-foreground text-sm font-medium mb-2 px-1">
+              <div className="flex items-center gap-2 text-muted-foreground text-sm font-medium mb-2 px-6">
                 <Clock className="h-4 w-4" />
                 <span>Recentes</span>
               </div>
@@ -125,15 +120,6 @@ export function Sidebar({ isPinnedOpen, onMenuClick }: SidebarProps) {
         <Button
           variant="ghost"
           className="w-full h-12 border-none flex items-center relative"
-          style={
-            theme === "dark"
-              ? {
-                  background:
-                    "linear-gradient(90deg, #8A2BE2 0%, #C71585 100%)",
-                  color: "#E0E0E0",
-                }
-              : {}
-          }
           onClick={() => setTheme(theme == "dark" ? "light" : "dark")}
         >
           <span className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8">

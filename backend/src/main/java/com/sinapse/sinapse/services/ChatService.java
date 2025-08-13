@@ -2,7 +2,9 @@ package com.sinapse.sinapse.services;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +13,19 @@ public class ChatService {
 
     private final ChatClient chatClient;
 
-    public ChatService(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory) {
+    public ChatService(ChatClient.Builder chatClientBuilder) {
+
+        ChatMemory chatMemory = MessageWindowChatMemory.builder()
+            .maxMessages(10)
+            .build();
+
         OpenAiChatOptions options = new OpenAiChatOptions();
         options.setModel("llama-3.3-70b-versatile");
         this.chatClient = chatClientBuilder
                 .defaultOptions(options)
-                .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
+                .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build(),
+                new SimpleLoggerAdvisor()
+                )
                 .build();
 
     }
@@ -36,6 +45,7 @@ public class ChatService {
 
         String response = chatClient
                 .prompt()
+                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, "123456"))
                 .user(engineeredMessage)
                 .call()
                 .content();

@@ -44,7 +44,7 @@ function App() {
                     .join("\n");
                   if (!cleanedText.trim()) return;
                   setMessages((prev) => [...prev, { text, sender: "user" }]);
-                  fetch(`http://localhost:8080/ai/generate?message=${text}`)
+                  fetch(`http://localhost:8080/api/chat/ai/generate?message=${text}`)
                     .then((res) => res.json())
                     .then((data) => {
                       setMessages((prev) => [
