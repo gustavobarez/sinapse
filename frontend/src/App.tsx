@@ -1,10 +1,10 @@
-import { ChatInput } from "@components/Chat";
-import { ChatBubble } from "@components/ChatBubble";
-import { Navbar } from "@components/Navbar";
-import { Sidebar } from "@components/Sidebar";
-import { ThemeProvider } from "@components/theme-provider";
+import { ThemeProvider } from "./providers/theme-provider";
 import { useState } from "react";
-import "./textarea-focus.css";
+import { Navbar } from "./features/layout/components/Navbar";
+import "./features/chat/styles/textarea-focus.css";
+import { ChatBubble } from "./features/chat/components/ChatBubble";
+import { Sidebar } from "./features/layout/components/Sidebar";
+import { ChatInput } from "./features/chat/components/Chat";
 
 function App() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -44,7 +44,9 @@ function App() {
                     .join("\n");
                   if (!cleanedText.trim()) return;
                   setMessages((prev) => [...prev, { text, sender: "user" }]);
-                  fetch(`http://localhost:8080/api/chat/ai/generate?message=${text}`)
+                  fetch(
+                    `http://localhost:8080/api/chat/ai/generate?message=${text}`
+                  )
                     .then((res) => res.json())
                     .then((data) => {
                       setMessages((prev) => [

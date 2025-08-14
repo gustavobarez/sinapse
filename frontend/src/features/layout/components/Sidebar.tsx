@@ -1,8 +1,8 @@
+import { cn } from "@components/lib/utils";
 import { Button } from "@components/ui/button";
 import { Clock, Menu, MessageSquare, Moon, Settings, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useState } from "react";
-import { cn } from "./lib/utils";
 
 interface SidebarProps {
   isPinnedOpen: boolean;
