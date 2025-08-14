@@ -25,9 +25,9 @@ function App() {
     >
       <div className="flex h-screen bg-white dark:bg-gray-800">
         <Sidebar isPinnedOpen={isSidebarExpanded} onMenuClick={toggleSidebar} />
-        <main className="flex-1 p-6 relative">
+        <main className="flex-1 p-6 relative flex flex-col">
           <Navbar />
-          <div className="flex flex-col gap-2">
+          <div className="flex-1 overflow-y-auto flex flex-col gap-2 pb-24">
             {messages.map((msg, idx) => (
               <ChatBubble key={idx} message={msg.text} sender={msg.sender} />
             ))}
