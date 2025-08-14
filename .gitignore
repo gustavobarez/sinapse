@@ -34,3 +34,5 @@ build/
 
 ### Arch Linux ###
 .tool-versions
+
+*.env

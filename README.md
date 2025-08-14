@@ -1,1 +1,1 @@
-# <img src="./frontend/public/images/sinapse-logo-better-quality-semfundo.png" width="30"> Sinapse
+# <img src="./frontend/public/images/icon.png" width="30"> Sinapse
