@@ -1,5 +1,5 @@
 import { ThemeProvider } from "./providers/theme-provider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navbar } from "./features/layout/components/Navbar";
 import "./features/chat/styles/textarea-focus.css";
 import { ChatBubble } from "./features/chat/components/ChatBubble";
@@ -8,10 +8,36 @@ import { ChatInput } from "./features/chat/components/Chat";
 
 function App() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
+
   const [text, setText] = useState("");
+
   const [messages, setMessages] = useState<
     { text: string; sender: "user" | "system" }[]
   >([]);
+
+  useEffect(() => {
+    if (messages.length > 0) {
+      console.log("Messages length:", messages.length);
+      setTimeout(() => {
+        const lastMessageIndex = messages.length - 1;
+        const container = document.querySelector(".overflow-y-auto");
+        const lastMessageElement = document.querySelector(
+          `[data-message-index="${lastMessageIndex}"]`
+        );
+        console.log("Container:", container);
+        console.log("Container scrollHeight:", container?.scrollHeight);
+        console.log("Container clientHeight:", container?.clientHeight);
+        console.log("Last message element:", lastMessageElement);
+        if (lastMessageElement) {
+          lastMessageElement.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+          console.log("ScrollIntoView called");
+        }
+      }, 100);
+    }
+  }, [messages]);
 
   const toggleSidebar = () => {
     setIsSidebarExpanded(!isSidebarExpanded);
@@ -25,12 +51,18 @@ function App() {
     >
       <div className="flex h-screen bg-white dark:bg-gray-800">
         <Sidebar isPinnedOpen={isSidebarExpanded} onMenuClick={toggleSidebar} />
-        <main className="flex-1 p-6 relative flex flex-col">
+        <main className="flex-1 p-6 relative flex flex-col h-screen">
           <Navbar />
-          <div className="flex-1 overflow-y-auto flex flex-col gap-2 pb-24">
+          <div
+            className="overflow-y-scroll flex flex-col gap-2"
+            style={{ height: "195px", maxHeight: "195x" }}
+          >
             {messages.map((msg, idx) => (
-              <ChatBubble key={idx} message={msg.text} sender={msg.sender} />
+              <div key={idx} data-message-index={idx} className="flex flex-col">
+                <ChatBubble message={msg.text} sender={msg.sender} />
+              </div>
             ))}
+            <div style={{ height: "50px", minHeight: "50px" }} />
           </div>
           <div className="absolute bottom-10 left-0 w-full flex justify-center">
             <div className="w-full max-w-3xl pb-0">
