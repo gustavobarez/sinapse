@@ -20,7 +20,7 @@ public class ChatService {
             .build();
 
         OpenAiChatOptions options = new OpenAiChatOptions();
-        options.setModel("llama-3.3-70b-versatile");
+        options.setModel("openai/gpt-oss-20b");
         this.chatClient = chatClientBuilder
                 .defaultOptions(options)
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build(),

@@ -11,7 +11,7 @@ public class ChatClientConfiguration {
     @Bean
     public ChatClient chatClient(ChatClient.Builder builder) {
         OpenAiChatOptions options = new OpenAiChatOptions();
-        options.setModel("llama-3.3-70b-versatile");
+        options.setModel("openai/gpt-oss-20b");
 
         return builder
                 .defaultOptions(options)
