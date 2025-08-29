@@ -5,8 +5,10 @@ import "./features/chat/styles/textarea-focus.css";
 import { Navbar } from "./features/layout/components/Navbar";
 import { Sidebar } from "./features/layout/components/Sidebar";
 import { ThemeProvider } from "./providers/theme-provider";
+import { TypingBubble } from "./features/chat/components/TypingBubble";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(false);
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
   const [text, setText] = useState("");
   const [messages, setMessages] = useState<
@@ -31,6 +33,7 @@ function App() {
             {messages.map((msg, idx) => (
               <ChatBubble key={idx} message={msg.text} sender={msg.sender} />
             ))}
+            {isLoading && <TypingBubble sender="system" />}
           </div>
           <div className="absolute bottom-10 left-0 w-full flex justify-center">
             <div className="w-full max-w-3xl pb-0">
@@ -43,26 +46,29 @@ function App() {
                     .filter((line) => line.trim() !== "")
                     .join("\n");
                   if (!cleanedText.trim()) return;
+
                   setMessages((prev) => [...prev, { text, sender: "user" }]);
-                  const requestData = { message: text };
+                  setIsLoading(true);
+                  setText("");
 
                   fetch("http://localhost:8080/api/chat/ai/generate", {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",
                     },
-                    body: JSON.stringify(requestData),
+                    body: JSON.stringify({ message: text }),
                   })
-                    .then((response) => {
-                      return response.json();
-                    })
+                    .then((response) => response.json())
                     .then((data) => {
+                      setIsLoading(false);
                       setMessages((prev) => [
                         ...prev,
                         { text: data.result, sender: "system" },
                       ]);
+                    })
+                    .catch(() => {
+                      setIsLoading(false);
                     });
-                  setText("");
                 }}
               />
             </div>
