@@ -1,10 +1,10 @@
-import { ThemeProvider } from "./providers/theme-provider";
 import { useState } from "react";
-import { Navbar } from "./features/layout/components/Navbar";
-import "./features/chat/styles/textarea-focus.css";
-import { ChatBubble } from "./features/chat/components/ChatBubble";
-import { Sidebar } from "./features/layout/components/Sidebar";
 import { ChatInput } from "./features/chat/components/Chat";
+import { ChatBubble } from "./features/chat/components/ChatBubble";
+import "./features/chat/styles/textarea-focus.css";
+import { Navbar } from "./features/layout/components/Navbar";
+import { Sidebar } from "./features/layout/components/Sidebar";
+import { ThemeProvider } from "./providers/theme-provider";
 
 function App() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -44,10 +44,18 @@ function App() {
                     .join("\n");
                   if (!cleanedText.trim()) return;
                   setMessages((prev) => [...prev, { text, sender: "user" }]);
-                  fetch(
-                    `http://localhost:8080/api/chat/ai/generate?message=${text}`
-                  )
-                    .then((res) => res.json())
+                  const requestData = { message: text };
+
+                  fetch("http://localhost:8080/api/chat/ai/generate", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(requestData),
+                  })
+                    .then((response) => {
+                      return response.json();
+                    })
                     .then((data) => {
                       setMessages((prev) => [
                         ...prev,
