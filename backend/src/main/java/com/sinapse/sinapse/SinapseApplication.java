@@ -12,8 +12,6 @@ public class SinapseApplication {
 		Dotenv dotenv = Dotenv.configure().load();
 		dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
 
-		System.out.println("--- DEBUG --- Chave lida do .env: " + System.getProperty("GROQ_API_KEY"));
-
 		SpringApplication.run(SinapseApplication.class, args);
 	}
 
